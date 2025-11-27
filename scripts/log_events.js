@@ -1,7 +1,6 @@
-// ============ ПОЛНЫЙ LOGGER - СТАВЬ В НАЧАЛО index.js ============
+// ============ ПОЛНЫЙ LOGGER ============
 let loggingEnabled = false;
 
-// Функция для красивого форматирования
 function formatArgs(args) {
 	if (args.length === 0) return "нет аргументов";
 
@@ -60,14 +59,14 @@ mp.events.call = function (eventName, ...args) {
 };
 
 // 3. Server → Client
-const originalEventsAdd = mp.events.add;
-mp.events.add = function (eventName, callback) {
-	const wrappedCallback = function (...args) {
-		logEvent("S→C", "00FFFF", eventName, args);
-		return callback.apply(this, args);
-	};
-	return originalEventsAdd.call(mp.events, eventName, wrappedCallback);
-};
+// const originalEventsAdd = mp.events.add;
+// mp.events.add = function (eventName, callback) {
+// 	const wrappedCallback = function (...args) {
+// 		logEvent("S→C", "00FFFF", eventName, args);
+// 		return callback.apply(this, args);
+// 	};
+// 	return originalEventsAdd.call(mp.events, eventName, wrappedCallback);
+// };
 
 // ==================== УПРАВЛЕНИЕ ====================
 
@@ -90,7 +89,6 @@ mp.keys.bind(0x77, false, function () {
 	}
 });
 
-// Стартовое сообщение
 mp.gui.chat.push("!{FFFF00}╔═══════════════════════════╗");
 mp.gui.chat.push("!{FFFF00}║ [FULL LOGGER] Загружен    ║");
 mp.gui.chat.push("!{FFFF00}║ F8 = Вкл/Выкл логов       ║");
